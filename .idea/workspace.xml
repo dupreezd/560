@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectId" id="1WzjkgnTewQgKQ6N4DIThyBgZ9j" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Downloaded.Files.Path.Enabled" value="false" />
+    <property name="Repository.Attach.Annotations" value="false" />
+    <property name="Repository.Attach.JavaDocs" value="false" />
+    <property name="Repository.Attach.Sources" value="false" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
+    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.proportion" value="0.0" />
+    <property name="project.structure.side.proportion" value="0.0" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="" />
+      <created>1580159461391</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1580159461391</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="320" y="95" width="800" height="717" key="#Intentions" timestamp="1580160348513">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="320" y="95" width="800" height="717" key="#Intentions/0.23.1440.813@0.23.1440.813" timestamp="1580160348513" />
+    <state x="320" y="95" key="#Project_Structure" timestamp="1580159479284">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="320" y="95" key="#Project_Structure/0.23.1440.813@0.23.1440.813" timestamp="1580159479284" />
+    <state x="529" y="352" key="Github.CreateGistDialog" timestamp="1580330187471">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="529" y="352" key="Github.CreateGistDialog/0.23.1440.813@0.23.1440.813" timestamp="1580330187471" />
+    <state x="399" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1580330029690">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="399" y="262" key="com.intellij.ide.util.TipDialog/0.23.1440.813@0.23.1440.813" timestamp="1580330029690" />
+    <state x="432" y="330" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD" timestamp="1580160128102">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="432" y="330" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.1440.813@0.23.1440.813" timestamp="1580160128102" />
+  </component>
+</project>
