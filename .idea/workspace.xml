@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="" />
+    <list default="true" id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/MainMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/MainMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/State.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -14,7 +20,11 @@
       </list>
     </option>
   </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="ProjectId" id="1WzjkgnTewQgKQ6N4DIThyBgZ9j" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -26,10 +36,32 @@
     <property name="Repository.Attach.JavaDocs" value="false" />
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
+    <property name="settings.editor.selected.configurable" value="editor.preferences.fonts.default" />
+  </component>
+  <component name="RunManager">
+    <configuration name="MainMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="a1.MainMap" />
+      <module name="a1" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="a1.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.MainMap" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -53,10 +85,50 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="320" y="95" key="#Project_Structure/0.23.1440.813@0.23.1440.813" timestamp="1580159479284" />
+    <state x="184" y="91" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1580332219639">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="184" y="91" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.813@0.23.1440.813" timestamp="1580332219639" />
     <state x="529" y="352" key="Github.CreateGistDialog" timestamp="1580330187471">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="529" y="352" key="Github.CreateGistDialog/0.23.1440.813@0.23.1440.813" timestamp="1580330187471" />
+    <state width="1350" height="188" key="GridCell.Tab.0.bottom" timestamp="1580583188950">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1580583188950" />
+    <state width="1350" height="188" key="GridCell.Tab.0.center" timestamp="1580583188949">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1580583188949" />
+    <state width="1350" height="188" key="GridCell.Tab.0.left" timestamp="1580583188948">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1580583188948" />
+    <state width="1350" height="188" key="GridCell.Tab.0.right" timestamp="1580583188949">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1580583188949" />
+    <state width="1350" height="188" key="GridCell.Tab.1.bottom" timestamp="1580583190153">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.1.bottom/0.23.1440.813@0.23.1440.813" timestamp="1580583190153" />
+    <state width="1350" height="188" key="GridCell.Tab.1.center" timestamp="1580583190148">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.1.center/0.23.1440.813@0.23.1440.813" timestamp="1580583190148" />
+    <state width="1350" height="188" key="GridCell.Tab.1.left" timestamp="1580583190147">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.1.left/0.23.1440.813@0.23.1440.813" timestamp="1580583190147" />
+    <state width="1350" height="188" key="GridCell.Tab.1.right" timestamp="1580583190149">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state width="1350" height="188" key="GridCell.Tab.1.right/0.23.1440.813@0.23.1440.813" timestamp="1580583190149" />
+    <state x="211" y="23" key="SettingsEditor" timestamp="1580581338467">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="211" y="23" key="SettingsEditor/0.23.1440.813@0.23.1440.813" timestamp="1580581338467" />
     <state x="399" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1580330029690">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
@@ -65,5 +137,24 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="432" y="330" key="com.intellij.jarRepository.RepositoryAttachDialog-DOWNLOAD/0.23.1440.813@0.23.1440.813" timestamp="1580160128102" />
+    <state x="201" y="113" width="1037" height="715" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2" timestamp="1580580590268">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="201" y="113" width="1037" height="715" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.813@0.23.1440.813" timestamp="1580580590268" />
+    <state x="385" y="160" width="670" height="676" key="search.everywhere.popup" timestamp="1580332235817">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="385" y="160" width="670" height="676" key="search.everywhere.popup/0.23.1440.813@0.23.1440.813" timestamp="1580332235817" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/a1/MainMap.java</url>
+          <line>41</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -11,7 +11,7 @@ public class State {
     private String name;
     private List<State> neighbors;
 
-    public static final Color blank = new Color("#####");
+    public static final Color blank = new Color("#####"); //states will be initialized w/ dummy color to avoid null pointer exception ambiguity
 
     public State(String s) {
         name = s;
@@ -19,13 +19,12 @@ public class State {
         neighbors = new ArrayList<State>();
     }
 
-    public boolean equals(@NotNull String s) {
-        return getName().equals(s);
-    }
+    public boolean equals(@NotNull String s) { return getName().equals(s); } //lets us quickly check state equality by name only, probably for testing purposes only
 
+    //adds neighbors if not already in neighbor array
     public void addNeighbor(State s) {
         for (int i = 0; i < neighbors.size(); i++) {
-            if (neighbors.get(i).equals(s)) {
+            if (neighbors.get(i) == s) { // == here because they should literally be identical state objects
                 return;
             }
         }
@@ -36,8 +35,12 @@ public class State {
         color = c;
     }
 
-    public void setColor(String s) {
+    public void setColor(String s) { //lets us set colors directly using color name if we want
         color = new Color(s);
+    }
+
+    public List<State> getNeighbors() {
+        return neighbors;
     }
 
     public String getColor() {
