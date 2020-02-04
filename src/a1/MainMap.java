@@ -9,7 +9,7 @@ import java.util.Map;
 
 public class MainMap {
 
-    static boolean flag = false;
+    static boolean flag = false; //flag that updates when the input is no longer available
     public static void main(String[] args) throws IOException {
 
         List<Color> colors = new ArrayList<>(); //color index
@@ -20,14 +20,16 @@ public class MainMap {
 
         /// READING INPUT ///
 
-        //input format is the following:
-        //one string representing color per line
-        //newline
-        //one string representing state per line
-        //newline
-        //two strings representing neighboring states per line
+        /*
+        input format is the following:
+        one string representing color per line
+        newline
+        one string representing state per line
+        newline
+        two strings representing neighboring states per line
+         */
 
-        while (!in.ready()) {}
+        while (!in.ready()) {} //stalls until an input it available
         while (true) { //reading colors
             String next = next(in);
             if (next.equals("")) { break; }
@@ -43,17 +45,14 @@ public class MainMap {
                 hashed_states.put(next, states.get(states.size()-1));
             }
         }
-        int check = System.in.available();
-        while (true) { //adding neighboring states to one another's neighbor lists
+        do { //adding neighboring states to one another's neighbor lists, do-while makes the loop break once we reach the end of the input
             String next = next(in);
             String next_2 = next(in);
             State next_state = hashed_states.get(next);
             State next_neighbor = hashed_states.get(next_2);
-
-            next_state.addNeighbor(next_neighbor);
+            next_state.addNeighbor(next_neighbor); //add the states to one another's neighbor list, now we have a graph
             next_neighbor.addNeighbor(next_state);
-            if (flag) { break; }
-        }
+        } while (!flag);
         in.close();
 
         //------------------------------------------
@@ -72,14 +71,13 @@ public class MainMap {
     }
 
     public static String next(InputStreamReader in) throws IOException {
-        StringBuilder s = new StringBuilder();
-        char c; int i;
+        StringBuilder s = new StringBuilder(); //string builder is suggested to be used when dynamically concatenating chars
+        char c;
         while (true) {
-            i = in.read();
-            c = (char)i;
+            c = (char)in.read(); //in.read() gets the integer form of the next char on the buffer, and returns -1 when buffer is empty
             if (c == ' ' || c == '\n') { break; }
             s.append(c);
-            if (!in.ready()) { flag = true; break; }
+            if (!in.ready()) { flag = true; break; } //in.ready() is false when the buffer is empty, so we set the flag to break the while loop in main
         }
         return s.toString();
     }
