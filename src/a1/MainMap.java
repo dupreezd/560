@@ -1,19 +1,22 @@
 package a1;
 
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.*;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class MainMap {
 
+    static boolean flag = false;
     public static void main(String[] args) throws IOException {
 
-        List<Color> colors = new ArrayList<Color>(); //color index
-        List<State> states = new ArrayList<State>(); //state index
-        Map<String, State> hashed_states = new HashMap<String, State>(); //using a map here to simplify the process of recording neighboring states, since states are read in as strings multiple times, don't want to traverse array to match string to state every time
+        List<Color> colors = new ArrayList<>(); //color index
+        List<State> states = new ArrayList<>(); //state index
+        Map<String, State> hashed_states = new HashMap<>(); //using a map here to simplify the process of recording neighboring states, since states are read in as strings multiple times, don't want to traverse array to match string to state every time
 
-        Scanner scan = new Scanner(System.in);
-        InputStream in_stream = System.in; //input stream object is needed to exit the last while loop below since scanner does not close automatically over System.in
+        InputStreamReader in = new InputStreamReader(System.in); //input stream object is needed to exit the last while loop below since inner does not close automatically over System.in
 
         /// READING INPUT ///
 
@@ -24,31 +27,34 @@ public class MainMap {
         //newline
         //two strings representing neighboring states per line
 
+        while (!in.ready()) {}
         while (true) { //reading colors
-            String next = scan.nextLine();
+            String next = next(in);
             if (next.equals("")) { break; }
             else {
                 colors.add(new Color(next));
             }
         }
         while (true) { //reading states
-            String next = scan.nextLine();
+            String next = next(in);
             if (next.equals("")) { break; }
             else {
                 states.add(new State(next));
                 hashed_states.put(next, states.get(states.size()-1));
             }
         }
-        while (scan.nextLine().equals("")) { //adding neighboring states to one another's neighbor lists
-            String next = scan.next();
-            String next_2 = scan.next();
+        int check = System.in.available();
+        while (true) { //adding neighboring states to one another's neighbor lists
+            String next = next(in);
+            String next_2 = next(in);
             State next_state = hashed_states.get(next);
             State next_neighbor = hashed_states.get(next_2);
 
             next_state.addNeighbor(next_neighbor);
             next_neighbor.addNeighbor(next_state);
+            if (flag) { break; }
         }
-        scan.close();
+        in.close();
 
         //------------------------------------------
 
@@ -57,11 +63,25 @@ public class MainMap {
 //        for (Color color: colors){
 //            System.out.println(color.getName());
 //        }
-        for (State state: states){
-            //System.out.println(state.getName());
-            for (State neighbor: state.getNeighbors()) {
-                System.out.print("  " + neighbor.getName());
-            }
-        }
+//        for (State state: states){
+//            System.out.println(state.getName());
+//            for (State neighbor: state.getNeighbors()) {
+//                System.out.println("  " + neighbor.getName());
+//            }
+//        }
     }
+
+    public static String next(InputStreamReader in) throws IOException {
+        StringBuilder s = new StringBuilder();
+        char c; int i;
+        while (true) {
+            i = in.read();
+            c = (char)i;
+            if (c == ' ' || c == '\n') { break; }
+            s.append(c);
+            if (!in.ready()) { flag = true; break; }
+        }
+        return s.toString();
+    }
+
 }
