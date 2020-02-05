@@ -50,9 +50,9 @@ public class MainMap {
             next_neighbor.addNeighbor(next_state);
         } while (!flag);
         in.close();
-
-        country.construct();
         //endregion
+
+        country.backtrackingSearch(); //full backtracking search
 
         //region *TESTING*
 //        for (State state: country.getStates()){
