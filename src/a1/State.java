@@ -23,8 +23,8 @@ public class State {
 
     //adds neighbors if not already in neighbor array
     public void addNeighbor(State s) {
-        for (int i = 0; i < neighbors.size(); i++) {
-            if (neighbors.get(i) == s) { // == here because they should literally be identical state objects
+        for (State neighbor : neighbors) {
+            if (neighbor == s) { // == here because they should literally be identical state objects
                 return;
             }
         }
@@ -35,8 +35,8 @@ public class State {
         color = c;
     }
 
-    public void setColor(String s) { //lets us set colors directly using color name if we want
-        color = new Color(s);
+    public void resetColor() {
+        color = blank;
     }
 
     public List<State> getNeighbors() {

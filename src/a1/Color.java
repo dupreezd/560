@@ -10,11 +10,8 @@ public class Color {
         this.name = s;
     }
 
-    public boolean equals(@NotNull String s) { //lets us check which color it is by name
-        return this.getName().equals(s);
-    }
-
-    public boolean equals(@NotNull Color c) { //colors are equivalent if they have same name
+    public boolean equals(Color c) { //colors are equivalent if they have same name
+        if (c == null) {return false;}
         return this.getName().equals(c.getName());
     }
 
