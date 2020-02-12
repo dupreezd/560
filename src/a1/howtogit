@@ -1,0 +1,15 @@
+
+update you code w/ master every time you start working:
+
+    git pull        (pull frequently to avoid merge conflicts!)
+
+to add your changes:
+
+    git add .
+    git commit -m "insert brief message explaining what you changed"
+    git push
+
+bonus:
+
+    git status      ...will show you what changes you made but haven't added
+    git add -p      ...will let you pick which of your changes to push and which to ignore

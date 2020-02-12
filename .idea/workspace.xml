@@ -2,11 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/src/a1/howtogit" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Country.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Country.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/a1/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/a1/MainMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/MainMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/Color.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/Color.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -89,26 +88,30 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="184" y="91" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.813@0.23.1440.813" timestamp="1580332219639" />
+    <state x="494" y="230" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1581540234363">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="494" y="230" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.813@0.23.1440.813" timestamp="1581540234363" />
     <state x="529" y="352" key="Github.CreateGistDialog" timestamp="1580330187471">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="529" y="352" key="Github.CreateGistDialog/0.23.1440.813@0.23.1440.813" timestamp="1580330187471" />
-    <state width="1358" height="243" key="GridCell.Tab.0.bottom" timestamp="1580922382893">
+    <state width="1358" height="170" key="GridCell.Tab.0.bottom" timestamp="1581011573710">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1358" height="243" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1580922382893" />
-    <state width="1358" height="243" key="GridCell.Tab.0.center" timestamp="1580922382893">
+    <state width="1358" height="170" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1581011573710" />
+    <state width="1358" height="170" key="GridCell.Tab.0.center" timestamp="1581011573709">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1358" height="243" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1580922382893" />
-    <state width="1358" height="243" key="GridCell.Tab.0.left" timestamp="1580922382892">
+    <state width="1358" height="170" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1581011573709" />
+    <state width="1358" height="170" key="GridCell.Tab.0.left" timestamp="1581011573708">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1358" height="243" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1580922382892" />
-    <state width="1358" height="243" key="GridCell.Tab.0.right" timestamp="1580922382893">
+    <state width="1358" height="170" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1581011573708" />
+    <state width="1358" height="170" key="GridCell.Tab.0.right" timestamp="1581011573709">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1358" height="243" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1580922382893" />
+    <state width="1358" height="170" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1581011573709" />
     <state width="1358" height="268" key="GridCell.Tab.1.bottom" timestamp="1580920262637">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
@@ -125,10 +128,10 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state width="1358" height="268" key="GridCell.Tab.1.right/0.23.1440.813@0.23.1440.813" timestamp="1580920262636" />
-    <state x="323" y="32" key="SettingsEditor" timestamp="1580840793962">
+    <state x="323" y="32" key="SettingsEditor" timestamp="1581531477300">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state x="323" y="32" key="SettingsEditor/0.23.1440.813@0.23.1440.813" timestamp="1580840793962" />
+    <state x="323" y="32" key="SettingsEditor/0.23.1440.813@0.23.1440.813" timestamp="1581531477300" />
     <state x="399" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1580330029690">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
@@ -141,6 +144,10 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="201" y="113" width="1037" height="715" key="com.intellij.xdebugger.impl.breakpoints.ui.BreakpointsDialogFactory$2/0.23.1440.813@0.23.1440.813" timestamp="1580580590268" />
+    <state x="114" y="43" key="new project wizard" timestamp="1581479352082">
+      <screen x="0" y="23" width="1440" height="813" />
+    </state>
+    <state x="114" y="43" key="new project wizard/0.23.1440.813@0.23.1440.813" timestamp="1581479352082" />
     <state x="385" y="160" width="670" height="676" key="search.everywhere.popup" timestamp="1580874499216">
       <screen x="0" y="23" width="1440" height="813" />
     </state>

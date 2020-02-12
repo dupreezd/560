@@ -19,7 +19,7 @@ public class State {
         neighbors = new ArrayList<State>();
     }
 
-    public boolean equals(@NotNull String s) { return getName().equals(s); } //lets us quickly check state equality by name only, probably for testing purposes only
+    public boolean equals(@NotNull String s) {return getName().equals(s);} //lets us quickly check state equality by name only, probably for testing purposes only
 
     //adds neighbors if not already in neighbor array
     public void addNeighbor(State s) {
@@ -31,24 +31,10 @@ public class State {
         neighbors.add(s);
     }
 
-    public void setColor(Color c) {
-        color = c;
-    }
-
-    public void resetColor() {
-        color = blank;
-    }
-
-    public List<State> getNeighbors() {
-        return neighbors;
-    }
-
-    public String getColor() {
-        return color.getName();
-    }
-
-    public String getName() {
-        return name;
-    }
+    public void setColor(Color c) {color = c;}
+    public void resetColor() {color = blank;}
+    public List<State> getNeighbors() {return neighbors;}
+    public String getColor() {return color.getName();}
+    public String getName() {return name;}
 
 }
