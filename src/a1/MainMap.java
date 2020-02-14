@@ -46,8 +46,8 @@ public class MainMap {
             String next_2 = next(in);
             State next_state = country.getHashMap().get(next);
             State next_neighbor = country.getHashMap().get(next_2);
-            next_state.addNeighbor(next_neighbor); //add the states to one another's neighbor list, now we have a graph
-            next_neighbor.addNeighbor(next_state);
+            next_state.addFwdNeighbor(next_neighbor); //add the states to one another's neighbor list, now we have a graph
+            next_neighbor.addBwdNeighbor(next_state);
         } while (!flag);
         in.close();
         //endregion

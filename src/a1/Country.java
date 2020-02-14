@@ -33,7 +33,7 @@ public class Country {
         borders = new boolean[states.size()][states.size()];
         for (State state: states) {
             borders[index.get(state)][index.get(state)] = true;
-            for (State neighbor: state.getNeighbors()) {
+            for (State neighbor: state.getFwdNeighbors()) {
                 borders[index.get(state)][index.get(neighbor)] = true;
                 borders[index.get(neighbor)][index.get(state)] = true;
             }
