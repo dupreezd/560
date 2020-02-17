@@ -74,11 +74,11 @@ public class Country {
     }
 
     public void arcCheck(State s, List<Set<Color>> temp, Color c) {
-        for (State neighbor: s.getFwdNeighbors()) {
-            temp.get(neighbor.getPosition()).remove(c);
-        }
-        for (State neighbor: s.getFwdNeighbors()) {
-            Set<Color> tempSet = temp.get(neighbor.getPosition());
+//        for (State neighbor: s.getFwdNeighbors()) {
+//            temp.get(neighbor.getPosition()).remove(c);
+//        }
+        for (State state: states) {
+            Set<Color> tempSet = temp.get(state.getPosition());
             if (tempSet.size() == 1) {
                 Color c2 = a1.State.blank;
                 for (Color color: tempSet) {c2 = color;}
@@ -92,11 +92,12 @@ public class Country {
     public List<Set<Color>> arcIsValid(State s, Color c, List<Set<Color>> domain) { //returns empty list if failed, returns new domain if valid
         nodesSearched++;
         List<Set<Color>> temp = new ArrayList<Set<Color>>(domain);
+        for (int i = 0; i < temp.size(); i++) {
+            temp.add(i, new HashSet<Color>(temp.get(i)));
+            temp.remove(i+1);
+        }
         temp.get(s.getPosition()).clear();
         temp.get(s.getPosition()).add(c);
-        for (Set<Color> tempSet: temp) {
-            tempSet = new HashSet<Color>(tempSet);
-        }
         arcCheck(s, temp, c);
         for (Set<Color> set: temp) {
             if (set.isEmpty()) {return new ArrayList<Set<Color>>();}
