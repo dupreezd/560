@@ -149,15 +149,29 @@ public class Country {
         for (State s: states){
             s.setColor(colors.get(i));//start by making all states one color
             steps++;
+
         }
+        i++; //move to next color
+
         for (State s: states) {
-            if (s.getNeighbors().size == 2){//if state has 2 neighbors and is not already valid, make it the second color
-                if (isValid(s, colors.get(i++))){
-                    s.setColor(colors.get(i++));
+            if (s.getFwdNeighbors().size == 2){//if state has 2 neighbors and is not already valid, make it the second color
+                if (!isValid(s, colors.get(i-1))){
+                    s.setColor(colors.get(i));
                     steps++;
                 }
             }
         }
+        i++; //move to next color
+
+        for (State s: states){
+            if (!isValid(s, colors.get(i-1))){
+
+            }
+        }
+
+
+
+
     }
 
     class StateComparator implements Comparator<State>{
