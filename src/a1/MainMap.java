@@ -37,7 +37,7 @@ public class MainMap {
             String next = next(in);
             if (next.equals("")) { break; }
             else {
-                country.addState(new State(next));
+                country.addState(new State(next, country.getStates().size()));
                 country.getHashMap().put(next, country.getStates().get(country.getStates().size()-1));
             }
         }

@@ -11,12 +11,21 @@ public class State {
     private String name;
     private List<State> fwdNeighbors;
     private List<State> bwdNeighbors;
+    private int position;
 
     public static final Color blank = new Color("#####"); //states will be initialized w/ dummy color to avoid null pointer exception ambiguity
 
     public State(String s) {
         name = s;
         color = blank;
+        fwdNeighbors = new ArrayList<State>();
+        bwdNeighbors = new ArrayList<State>();
+    }
+
+    public State(String s, int p) {
+        name = s;
+        color = blank;
+        position = p;
         fwdNeighbors = new ArrayList<State>();
         bwdNeighbors = new ArrayList<State>();
     }
@@ -42,10 +51,12 @@ public class State {
     }
 
     public void setColor(Color c) {color = c;}
+    public void setPosition(int p) {position = p;}
     public void resetColor() {color = blank;}
     public List<State> getFwdNeighbors() {return fwdNeighbors;}
     public List<State> getBwdNeighbors() {return bwdNeighbors;}
     public String getColor() {return color.getName();}
     public String getName() {return name;}
+    public int getPosition() {return position;}
 
 }
