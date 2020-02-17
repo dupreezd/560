@@ -74,7 +74,7 @@ public class Country {
         return false; //if it never returns true, then there's no solution
     }
 
-    public void arcCheck(State s, List<Set<Color>> temp, Color c) {
+    public PriorityQueue<State> arcCheck(State s, List<Set<Color>> temp, Color c, PriorityQueue<State> tempPq) {
 //        for (State neighbor: s.getFwdNeighbors()) {
 //            temp.get(neighbor.getPosition()).remove(c);
 //        }
@@ -82,15 +82,17 @@ public class Country {
             Set<Color> tempSet = temp.get(state.getPosition());
             if (tempSet.size() == 1) {
                 Color c2 = a1.State.blank;
+                tempPq.remove(state);
                 for (Color color: tempSet) {c2 = color;}
                 for(State neighbor2: s.getFwdNeighbors()) {
                     temp.get(neighbor2.getPosition()).remove(c2);
                 }
             }
         }
+        return tempPq;
     }
 
-    public List<Set<Color>> arcIsValid(State s, Color c, List<Set<Color>> domain) { //returns empty list if failed, returns new domain if valid
+    public List<Set<Color>> arcIsValid(State s, Color c, List<Set<Color>> domain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
         nodesSearched++;
         List<Set<Color>> temp = new ArrayList<Set<Color>>(domain);
         for (int i = 0; i < temp.size(); i++) {
@@ -99,7 +101,7 @@ public class Country {
         }
         temp.get(s.getPosition()).clear();
         temp.get(s.getPosition()).add(c);
-        arcCheck(s, temp, c);
+        arcCheck(s, temp, c, tempPq);
         for (Set<Color> set: temp) {
             if (set.isEmpty()) {return new ArrayList<Set<Color>>();}
         }
@@ -108,14 +110,18 @@ public class Country {
 
     public boolean arcPaint(List<Set<Color>> domain) {
         State state = pq.poll();
+        PriorityQueue<State> tempPq = new PriorityQueue<>(pq);
         for(Color color: colors) {
-            List<Set<Color>> validDomain = arcIsValid(state, color, tempDomains);
+            List<Set<Color>> validDomain = arcIsValid(state, color, domain, tempPq);
             if (!validDomain.isEmpty()) {
                 if (pq.isEmpty()) {
                     tempDomains = validDomain;
                     return true;
                 }
-                if (arcPaint(validDomain)) {return true;}
+                if (arcPaint(validDomain)) {
+                    pq = tempPq;
+                    return true;
+                }
                 pq.add(state);
             }
         }
@@ -151,7 +157,7 @@ public class Country {
             steps++;
         }
         for (State s: states) {
-            if (s.getNeighbors().size == 2){//if state has 2 neighbors and is not already valid, make it the second color
+            if (s.getFwdNeighbors().size() == 2){//if state has 2 neighbors and is not already valid, make it the second color
                 if (isValid(s, colors.get(i++))){
                     s.setColor(colors.get(i++));
                     steps++;
