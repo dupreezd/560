@@ -13,7 +13,8 @@ public class Country {
 
     private boolean[][] borders; //adjacency matrix tracking which nodes border one another
     private Color[] tempColors; //parallel array to states list, used to assign colors temporarily while backtracking
-    private int nodesSearched; //counter used to report # of steps in the output
+    private int nodesSearched; //counter used to report # of steps in the backtracking output
+    private int steps; //counter to report # of steps in local search
 
     private List<Set<Color>> tempDomains;
     private PriorityQueue<State> pq;
@@ -139,6 +140,23 @@ public class Country {
             System.out.println("No solution");
         }
         System.out.println("Nodes searched: " + nodesSearched);
+    }
+
+    public void localSearch(){
+        int i = 0;
+
+        for (State s: states){
+            s.setColor(colors.get(i));//start by making all states one color
+            steps++;
+        }
+        for (State s: states) {
+            if (s.getNeighbors().size == 2){//if state has 2 neighbors and is not already valid, make it the second color
+                if (isValid(s, colors.get(i++))){
+                    s.setColor(colors.get(i++));
+                    steps++;
+                }
+            }
+        }
     }
 
     class StateComparator implements Comparator<State>{
