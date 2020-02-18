@@ -56,7 +56,7 @@ public class MainMap {
         country.localSearch();
 
         //BE SURE TO UNCOMMENT THIS
-       // country.backtrackingSearch(); //full backtracking search
+        country.backtrackingSearch(); //full backtracking search
 
         //region *TESTING*
 //        for (State state: country.getStates()){

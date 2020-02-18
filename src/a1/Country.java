@@ -17,7 +17,7 @@ public class Country {
     private int nodesSearched; //counter used to report # of steps in the backtracking output
     private int steps; //counter to report # of steps in local search
 
-    private List<Set<Color>> tempDomains;
+    private List<Set<Color>> domain;
     private PriorityQueue<State> pq;
 
     public Country() {} //default constructor
@@ -49,10 +49,10 @@ public class Country {
         tempColors = new Color[states.size()];
         temp = new Color[states.size()];
 
-        tempDomains = new ArrayList<>(states.size());
+        domain = new ArrayList<>(states.size());
         Set<Color> tempSet = new HashSet<>(new ArrayList<Color>(colors));
         for (int i = 0; i < states.size(); i++) {
-            tempDomains.add(new HashSet<Color>(tempSet)); //just adding a set of all the colors for each state
+            domain.add(new HashSet<Color>(tempSet)); //just adding a set of all the colors for each state
         }
     }
 
@@ -85,59 +85,70 @@ public class Country {
         return false; //if it never returns true, then there's no solution
     }
 
-    public PriorityQueue<State> arcCheck(State s, List<Set<Color>> temp, Color c, PriorityQueue<State> tempPq) {
-//        for (State neighbor: s.getFwdNeighbors()) {
-//            temp.get(neighbor.getPosition()).remove(c);
-//        }
-        PriorityQueue<State> tempPq2 = new PriorityQueue<State>(tempPq);
-        for (State state: states) {
-            Set<Color> tempSet = temp.get(state.getPosition());
+    public boolean arcIsValid(State s, Color c, List<Set<Color>> tempDomain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
+
+        tempDomain.get(s.getPosition()).clear();
+        tempDomain.get(s.getPosition()).add(c);
+
+        List<State> checkerQ = new ArrayList<>();
+        checkerQ.add(s);
+        checkerQ.addAll(s.getFwdNeighbors());
+
+        while (checkerQ.size() > 0) {
+            Set<Color> tempSet = tempDomain.get(checkerQ.get(0).getPosition());
+
+            if (tempSet.size() == 0) {
+                return false;
+            }
+
             if (tempSet.size() == 1) {
                 Color c2 = a1.State.blank;
-                tempPq2.remove(state);
                 for (Color color: tempSet) {c2 = color;}
-                for(State neighbor2: s.getFwdNeighbors()) {
-                    temp.get(neighbor2.getPosition()).remove(c2);
-                    if (temp.get(neighbor2.getPosition()).size() == 0) {
-                        return tempPq;
+
+                for(State neighbor: checkerQ.get(0).getFwdNeighbors()) {
+                    if(tempDomain.get(neighbor.getPosition()).remove(c2)) {
+                        checkerQ.addAll(neighbor.getFwdNeighbors());
+                    }
+                    if (tempDomain.get(neighbor.getPosition()).size() == 0) {
+                        return false;
                     }
                 }
-            }
-        }
-        return tempPq2;
-    }
 
-    public List<Set<Color>> arcIsValid(State s, Color c, List<Set<Color>> domain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
-        nodesSearched++;
-        List<Set<Color>> temp = new ArrayList<Set<Color>>(domain);
-        for (int i = 0; i < temp.size(); i++) {
-            temp.add(i, new HashSet<Color>(temp.get(i)));
-            temp.remove(i+1);
+                tempPq.remove(checkerQ.get(0));
+            }
+
+            checkerQ.remove(0);
         }
-        temp.get(s.getPosition()).clear();
-        temp.get(s.getPosition()).add(c);
-        arcCheck(s, temp, c, tempPq);
-        for (Set<Color> set: temp) {
-            if (set.isEmpty()) {return new ArrayList<Set<Color>>();}
-        }
-        return temp;
+        return true;
     }
 
     public boolean arcPaint(List<Set<Color>> domain, PriorityQueue<State> pq) {
         State state = pq.poll();
-        PriorityQueue<State> tempPq = new PriorityQueue<>(pq);
-        for(Color color: colors) {
-            List<Set<Color>> validDomain = arcIsValid(state, color, domain, tempPq);
-            if (!validDomain.isEmpty()) {
-                if (pq.isEmpty()) {
-                    tempDomains = validDomain;
+        nodesSearched++;
+
+        for(Color color: domain.get(state.getPosition())) {
+
+            List<Set<Color>> tempDomain = new ArrayList<Set<Color>>(domain);
+            for (int i = 0; i < tempDomain.size(); i++) {
+                tempDomain.add(i, new HashSet<Color>(tempDomain.get(i)));
+                tempDomain.remove(i+1);
+            }
+
+            PriorityQueue<State> tempPq = new PriorityQueue<>(pq);
+
+            if (arcIsValid(state, color, tempDomain, tempPq)) {
+
+                if (tempPq.isEmpty()) {
+                    this.pq = tempPq;
+                    this.domain = tempDomain;
                     return true;
                 }
-                if (arcPaint(validDomain, pq)) {
+
+                if (arcPaint(tempDomain, tempPq)) {
                     pq = tempPq;
+                    domain = tempDomain;
                     return true;
                 }
-                pq.add(state);
             }
         }
         return false;
@@ -151,9 +162,9 @@ public class Country {
 //                s.setColor(tempColors[index.get(s)]);
 //                System.out.println(s.getName() + " " + s.getColor());
 //            }
-        if (arcPaint(tempDomains, pq)) {
-            for (int i = 0; i < tempDomains.size(); i++) {
-                for (Color color: tempDomains.get(i)) {
+        if (arcPaint(domain, pq)) {
+            for (int i = 0; i < domain.size(); i++) {
+                for (Color color: domain.get(i)) {
                     states.get(i).setColor(color);
                     System.out.println(states.get(i).getName() + " " + color.getName());
                 }
