@@ -13,6 +13,7 @@ public class Country {
 
     private boolean[][] borders; //adjacency matrix tracking which nodes border one another
     private Color[] tempColors; //parallel array to states list, used to assign colors temporarily while backtracking
+    private Color[] temp; //same temporary color array for local search
     private int nodesSearched; //counter used to report # of steps in the backtracking output
     private int steps; //counter to report # of steps in local search
 
@@ -46,6 +47,7 @@ public class Country {
             pq.add(state);
         }
         tempColors = new Color[states.size()];
+        temp = new Color[states.size()];
 
         tempDomains = new ArrayList<>(states.size());
         Set<Color> tempSet = new HashSet<>(new ArrayList<Color>(colors));
@@ -58,6 +60,15 @@ public class Country {
         nodesSearched++;
         for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
             if (borders[index.get(s)][i] && c.equals(tempColors[i])) { return false; } //it's a neighbor and it's the same color, it's a no
+        }
+        return true;
+    }
+
+    //same as isValid method but uses temp[] for local search!
+    public boolean isValidLS(State s, Color c) { //check whether or not a state can be colored
+
+        for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
+            if (borders[index.get(s)][i] && c.equals(temp[i])) { return false; } //it's a neighbor and it's the same color, it's a no
         }
         return true;
     }
@@ -149,35 +160,75 @@ public class Country {
         System.out.println("Nodes searched: " + nodesSearched);
     }
 
+    public int checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
+        int con = 0;
+
+        for (State s: name.getFwdNeighbors()) {
+            if (checking.toString() == s.getColor()){ //if state being checked is same color as neighbor, increment counter
+                con++;
+            }
+        }
+        for (State s: name.getBwdNeighbors()) {
+            if (checking.toString() == s.getColor()){
+                con++;
+            }
+        }
+        return con;
+    }
+
+    public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
+        for (State s: states){
+            if (isValidLS(s, temp[index.get(s)])){
+                continue;
+            } if (index.get(s) + 1 == states.size()){
+                return true; //true only if we have reached the end of the list
+            } else {
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void localSearch(){
-        int i = 0;
+        setBorders();
+        Random r = new Random(); //will use for random assignment
+        System.out.println("\nLocal Search Result: ");
 
+        //start by assigning random colors
         for (State s: states){
-            s.setColor(colors.get(i));//start by making all states one color
-            steps++;
-
+            temp[index.get(s)] = colors.get(r.nextInt(colors.size()));
         }
-        i++; //move to next color
 
-        for (State s: states) {
-            if (s.getFwdNeighbors().size() == 2){//if state has 2 neighbors and is not already valid, make it the second color
-                if (!isValid(s, colors.get(i-1))){
-                    s.setColor(colors.get(i));
-                    steps++;
+        steps++; //increment steps
+
+        while (!isComplete()) { //run loop until all states are valid (see helper method)
+
+            for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
+
+                //generate random starting place
+                int start = r.nextInt(states.size());
+
+                //check conflicts for existing color, and next color. keep color with lowest constraints
+                State current = states.get(start);
+                int curConstraints = checkConstraints(current, temp[index.get(current)]); //current number of constraints on that state
+
+                for (Color c : colors) { //if there are less constraints with a different color, sets that color in temp
+                    int next = checkConstraints(current, c);
+                    if (next < curConstraints) {
+                        temp[start] = c;
+                        steps++; //increment counter
+                        curConstraints = next; //new lowest number to beat
+                    }
                 }
+
             }
         }
-        i++; //move to next color
 
+        //print final values
         for (State s: states){
-            if (!isValid(s, colors.get(i-1))){
-
-            }
+            System.out.println(s.getName() + " " + temp[index.get(s)].getName());
         }
-
-
-
-
+        System.out.println("Number of steps: " + steps);
     }
 
     class StateComparator implements Comparator<State>{

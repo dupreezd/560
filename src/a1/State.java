@@ -1,6 +1,6 @@
 package a1;
 
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,7 +30,7 @@ public class State {
         bwdNeighbors = new ArrayList<State>();
     }
 
-    public boolean equals(@NotNull String s) {return getName().equals(s);} //lets us quickly check state equality by name only, probably for testing purposes only
+   // public boolean equals(@NotNull String s) {return getName().equals(s);} //lets us quickly check state equality by name only, probably for testing purposes only
 
     //adds neighbors if not already in neighbor array
     public void addFwdNeighbor(State s) {

@@ -2,14 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="04ad4cfc-1e55-4d29-ae0f-a7f81f63a2c2" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/src/a1/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/out/production/a1/a1/.idea/a1.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/META-INF/a1.kotlin_module" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Color.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Color.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Country$StateComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Country$StateComparator.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Country.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Country.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/State.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/State.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/a1/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/Country.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/a1/MainMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/MainMap.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/a1/State.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/State.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ErrorTreeViewConfiguration">
+    <option name="hideInfoMessages" value="true" />
+    <option name="hideWarnings" value="true" />
+    <option name="HIDE_WARNINGS" value="true" />
+    <option name="HIDE_INFO_MESSAGES" value="true" />
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -35,11 +50,13 @@
     <property name="Repository.Attach.Sources" value="false" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="findjar.last.used.dir" value="$USER_HOME$/Downloads" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path" value="/usr/local/bin/node" />
     <property name="project.structure.last.edited" value="Modules" />
     <property name="project.structure.proportion" value="0.0" />
     <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="editor.preferences.import" />
+    <property name="settings.editor.selected.configurable" value="reference.idesettings.debugger.capture" />
   </component>
   <component name="RunManager">
     <configuration name="MainMap" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
@@ -91,45 +108,58 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="494" y="230" key="#com.intellij.fileTypes.FileTypeChooser/0.23.1440.813@0.23.1440.813" timestamp="1581540234363" />
+    <state x="490" y="284" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1581973953344">
+      <screen x="0" y="23" width="1280" height="709" />
+    </state>
+    <state x="490" y="284" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1280.709@0.23.1280.709" timestamp="1581973953344" />
     <state x="529" y="352" key="Github.CreateGistDialog" timestamp="1580330187471">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="529" y="352" key="Github.CreateGistDialog/0.23.1440.813@0.23.1440.813" timestamp="1580330187471" />
-    <state width="1358" height="181" key="GridCell.Tab.0.bottom" timestamp="1581972808428">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="213" key="GridCell.Tab.0.bottom" timestamp="1582046982781">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="213" key="GridCell.Tab.0.bottom/0.23.1280.709@0.23.1280.709" timestamp="1582046982781" />
     <state width="1358" height="181" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1581972808428" />
-    <state width="1358" height="181" key="GridCell.Tab.0.center" timestamp="1581972808427">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="213" key="GridCell.Tab.0.center" timestamp="1582046982778">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="213" key="GridCell.Tab.0.center/0.23.1280.709@0.23.1280.709" timestamp="1582046982778" />
     <state width="1358" height="181" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1581972808427" />
-    <state width="1358" height="181" key="GridCell.Tab.0.left" timestamp="1581972808427">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="213" key="GridCell.Tab.0.left" timestamp="1582046982777">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="213" key="GridCell.Tab.0.left/0.23.1280.709@0.23.1280.709" timestamp="1582046982777" />
     <state width="1358" height="181" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1581972808427" />
-    <state width="1358" height="181" key="GridCell.Tab.0.right" timestamp="1581972808427">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="213" key="GridCell.Tab.0.right" timestamp="1582046982779">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="213" key="GridCell.Tab.0.right/0.23.1280.709@0.23.1280.709" timestamp="1582046982779" />
     <state width="1358" height="181" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1581972808427" />
-    <state width="1358" height="268" key="GridCell.Tab.1.bottom" timestamp="1581972801061">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="202" key="GridCell.Tab.1.bottom" timestamp="1582045039659">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="202" key="GridCell.Tab.1.bottom/0.23.1280.709@0.23.1280.709" timestamp="1582045039659" />
     <state width="1358" height="268" key="GridCell.Tab.1.bottom/0.23.1440.813@0.23.1440.813" timestamp="1581972801061" />
-    <state width="1358" height="268" key="GridCell.Tab.1.center" timestamp="1581972801060">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="202" key="GridCell.Tab.1.center" timestamp="1582045039658">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="202" key="GridCell.Tab.1.center/0.23.1280.709@0.23.1280.709" timestamp="1582045039658" />
     <state width="1358" height="268" key="GridCell.Tab.1.center/0.23.1440.813@0.23.1440.813" timestamp="1581972801060" />
-    <state width="1358" height="268" key="GridCell.Tab.1.left" timestamp="1581972801060">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="202" key="GridCell.Tab.1.left" timestamp="1582045039658">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="202" key="GridCell.Tab.1.left/0.23.1280.709@0.23.1280.709" timestamp="1582045039658" />
     <state width="1358" height="268" key="GridCell.Tab.1.left/0.23.1440.813@0.23.1440.813" timestamp="1581972801060" />
-    <state width="1358" height="268" key="GridCell.Tab.1.right" timestamp="1581972801061">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state width="1218" height="202" key="GridCell.Tab.1.right" timestamp="1582045039659">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state width="1218" height="202" key="GridCell.Tab.1.right/0.23.1280.709@0.23.1280.709" timestamp="1582045039659" />
     <state width="1358" height="268" key="GridCell.Tab.1.right/0.23.1440.813@0.23.1440.813" timestamp="1581972801061" />
-    <state x="323" y="32" key="SettingsEditor" timestamp="1581955685585">
-      <screen x="0" y="23" width="1440" height="813" />
+    <state x="287" y="23" width="982" height="709" key="SettingsEditor" timestamp="1582043133527">
+      <screen x="0" y="23" width="1280" height="709" />
     </state>
+    <state x="287" y="23" width="982" height="709" key="SettingsEditor/0.23.1280.709@0.23.1280.709" timestamp="1582043133527" />
     <state x="323" y="32" key="SettingsEditor/0.23.1440.813@0.23.1440.813" timestamp="1581955685585" />
     <state x="399" y="262" key="com.intellij.ide.util.TipDialog" timestamp="1580330029690">
       <screen x="0" y="23" width="1440" height="813" />
@@ -151,16 +181,5 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="385" y="160" width="670" height="676" key="search.everywhere.popup/0.23.1440.813@0.23.1440.813" timestamp="1580874499216" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/src/a1/Country.java</url>
-          <line>114</line>
-          <option name="timeStamp" value="26" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
   </component>
 </project>
