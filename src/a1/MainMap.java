@@ -54,8 +54,6 @@ public class MainMap {
 
         country.backtrackingSearch(); //full backtracking search
 
-
-
         //region *TESTING*
 //        for (State state: country.getStates()){
 //            System.out.println(state.getName());

@@ -78,18 +78,22 @@ public class Country {
 //        for (State neighbor: s.getFwdNeighbors()) {
 //            temp.get(neighbor.getPosition()).remove(c);
 //        }
+        PriorityQueue<State> tempPq2 = new PriorityQueue<State>(tempPq);
         for (State state: states) {
             Set<Color> tempSet = temp.get(state.getPosition());
             if (tempSet.size() == 1) {
                 Color c2 = a1.State.blank;
-                tempPq.remove(state);
+                tempPq2.remove(state);
                 for (Color color: tempSet) {c2 = color;}
                 for(State neighbor2: s.getFwdNeighbors()) {
                     temp.get(neighbor2.getPosition()).remove(c2);
+                    if (temp.get(neighbor2.getPosition()).size() == 0) {
+                        return tempPq;
+                    }
                 }
             }
         }
-        return tempPq;
+        return tempPq2;
     }
 
     public List<Set<Color>> arcIsValid(State s, Color c, List<Set<Color>> domain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
@@ -108,7 +112,7 @@ public class Country {
         return temp;
     }
 
-    public boolean arcPaint(List<Set<Color>> domain) {
+    public boolean arcPaint(List<Set<Color>> domain, PriorityQueue<State> pq) {
         State state = pq.poll();
         PriorityQueue<State> tempPq = new PriorityQueue<>(pq);
         for(Color color: colors) {
@@ -174,10 +178,6 @@ public class Country {
 
             }
         }
-
-
-
-
     }
 
     class StateComparator implements Comparator<State>{
