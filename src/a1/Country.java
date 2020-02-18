@@ -179,12 +179,12 @@ public class Country {
         int con = 0;
 
         for (State s: name.getFwdNeighbors()) {
-            if (checking.toString() == s.getColor()){ //if state being checked is same color as neighbor, increment counter
+            if (checking == temp[index.get(s)]){ //if state being checked is same color as neighbor, increment counter
                 con++;
             }
         }
         for (State s: name.getBwdNeighbors()) {
-            if (checking.toString() == s.getColor()){
+            if (checking == temp[index.get(s)]){
                 con++;
             }
         }
@@ -193,7 +193,8 @@ public class Country {
 
     public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
         for (State s: states){
-            if (isValidLS(s, temp[index.get(s)])){
+
+            if (checkConstraints(s, temp[index.get(s)]) == 0){
                 continue;
             } if (index.get(s) + 1 == states.size()){
                 return true; //true only if we have reached the end of the list
@@ -205,8 +206,10 @@ public class Country {
         return true;
     }
 
+
     public void localSearch(){
         setBorders();
+        boolean complete = false;
         Random r = new Random(); //will use for random assignment
         System.out.println("\nLocal Search Result: ");
 
@@ -217,7 +220,7 @@ public class Country {
 
         steps++; //increment steps
 
-        while (!isComplete()) { //run loop until all states are valid (see helper method)
+        while (!complete) { //run loop until all states are valid (see helper method)
 
             for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
 
@@ -228,15 +231,21 @@ public class Country {
                 State current = states.get(start);
                 int curConstraints = checkConstraints(current, temp[index.get(current)]); //current number of constraints on that state
 
-                for (Color c : colors) { //if there are less constraints with a different color, sets that color in temp
-                    int next = checkConstraints(current, c);
-                    if (next < curConstraints) {
-                        temp[start] = c;
-                        steps++; //increment counter
-                        curConstraints = next; //new lowest number to beat
+                if (curConstraints != 0){ //don't enter this loop if 0 conflicts
+                    for (Color c : colors) { //if there are less constraints with a different color, sets that color in temp
+                        int next = checkConstraints(current, c);
+                        if (next < curConstraints) {
+                            temp[start] = c;
+                            steps++; //increment counter
+                            curConstraints = next; //new lowest number to beat
+                        }
                     }
-                }
+            }
 
+            }
+
+            if (isComplete()){
+                complete = true;
             }
         }
 
