@@ -11,12 +11,11 @@ public class Country {
     private Map<String, State> hashed_states = new HashMap<>(); //using a map here to simplify the process of recording neighboring states, since states are read in as strings multiple times, don't want to traverse array to match string to state every time
     private Map<State, Integer> index = new HashMap<>(); //map to find the index of a state in the array, for efficiency
 
-    private boolean[][] borders; //adjacency matrix tracking which nodes border one another
     private Color[] temp; //temporary color array for local search
-    private int[] problems;
+    private int[] problems; //keeps track of number of conflicts cause by each state
     private int nodesSearched; //counter used to report # of steps in the backtracking output
     private int steps; //counter to report # of steps in local search
-    private int con = 0;
+    private int con = 0; //global var for conflicts
 
     private List<Set<Color>> domain; //set of possible domains for backtracking (arc consistency)
     private PriorityQueue<State> pq; //priority queue to sort by most constraining variable
@@ -33,16 +32,10 @@ public class Country {
             index.put(states.get(i), i);
         }
     }
-    public void setBorders() { //constructs the adjacency matrix "borders" for local search and the initial pq + set of domains for backtracking
+    public void setBorders() { //initializes several parameters after input has been read (doesn't really set borders--vestigial name)
         buildIndex();
-        borders = new boolean[states.size()][states.size()]; //adjacency matrix
         pq = new PriorityQueue<>(states.size(), new StateComparator()); //priority queue with most constraining states on top
-        for (State state: states) { //filling the matrix and pq
-            borders[index.get(state)][index.get(state)] = true;
-            for (State neighbor: state.getFwdNeighbors()) {
-                borders[index.get(state)][index.get(neighbor)] = true;
-                borders[index.get(neighbor)][index.get(state)] = true;
-            }
+        for (State state: states) { //filling the pq
             pq.add(state);
         }
         temp = new Color[states.size()]; //initialize the temp color array for local search
