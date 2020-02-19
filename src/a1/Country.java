@@ -120,13 +120,15 @@ public class Country {
         System.out.println("Nodes searched: " + nodesSearched);
     }
 
-    public State checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
+    public State checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states & returns state that historically causes most issues
         con = 0;
-        int mostProblems = 0;
-        State problemChild = name;
+        int mostProblems = 0; //for counting the number of problems that most problematic state has
+        State problemChild = name; //node with highest accumulated conflicts
 
-        for (State s: name.getFwdNeighbors()) {
-            if (checking.equals(temp[index.get(s)])){ //if state being checked is same color as neighbor, increment counter
+        //check all neighbors to see if they cause constraints
+            //we only check neighbors instead of all the states to save time--over time a state will build up problem count anyway
+        for (State s : name.getFwdNeighbors()) {
+            if (checking.equals(temp[index.get(s)])) { //if state being checked is same color as neighbor, increment counter
                 con++;
                 if (++problems[index.get(s)] > mostProblems) {
                     mostProblems = problems[index.get(s)];
@@ -134,8 +136,8 @@ public class Country {
                 }
             }
         }
-        for (State s: name.getBwdNeighbors()) {
-            if (checking.equals(temp[index.get(s)])){
+        for (State s : name.getBwdNeighbors()) {
+            if (checking.equals(temp[index.get(s)])) {
                 con++;
                 if (++problems[index.get(s)] > mostProblems) {
                     mostProblems = problems[index.get(s)];
@@ -143,14 +145,13 @@ public class Country {
                 }
             }
         }
-        //return con;
+
         return problemChild;
     }
     public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
         for (State s: states){
             checkConstraints(s, temp[index.get(s)]);
             if (con > 0) {return false;}
-            //return index.get(s) + 1 == states.size(); //true only if we have reached the end of the list
         }
         return true;
     }
@@ -160,49 +161,55 @@ public class Country {
         boolean complete = false;
         Random r = new Random(); //will use for random assignment
         System.out.println("\nLocal Search Result: ");
-        for (State s: states){temp[index.get(s)] = colors.get(0);}
+        for (State s: states){temp[index.get(s)] = colors.get(r.nextInt(colors.size()));} //start by randomly assigning colors
+        int localSteps = 0; //step counter for random resents, maxes at 1,000,000 steps
 
         long startTime = System.currentTimeMillis(); //setting up timeout condition
         long maxTime = 60 * 1000 + startTime;
+
         while (!complete) { //run loop until all states are valid (see helper method)
-            int start = r.nextInt(states.size());
+            int start = r.nextInt(states.size()); //picks a random state to start at, or on reset
             State current = states.get(start);
-            int hasBeen = 0;
-            for (int i = 0; i < states.size()*states.size(); i++) { //10 random starting places before checking the whole list again
-                //generate random starting place
-                steps++;
+            for (int i = 0; i < states.size()*states.size(); i++) { //randomly reset the searched node after n^2 runs, where n = number of states
+                steps++; //total steps
+                localSteps++; //steps since last reset
 
                 //check conflicts for existing color, and next color. keep color with lowest constraints
-                //int curConstraints = checkConstraints(current, temp[index.get(current)]); //current number of constraints on that state
-                State problemChild = checkConstraints(current, temp[index.get(current)]);
+                State problemChild = checkConstraints(current, temp[index.get(current)]); //update constrains from current assignment
                 State newProblemChild = problemChild;
                 int curConstraints = con;
 
                 if (curConstraints > 0){ //don't enter this loop if 0 conflicts
                     for (Color c : colors) { //if there are less constraints with a different color, sets that color in temp
                         //int next = checkConstraints(current, c);
-                        newProblemChild = checkConstraints(problemChild, c);
-                        int next = con;
+                        newProblemChild = checkConstraints(problemChild, c); //which one is worst if we try another color?
+                        int next = con; //how many overall constraints did the new color cause?
                         if (next < curConstraints) {
                             temp[index.get(problemChild)] = c;
                             curConstraints = next; //new lowest number to beat
                         }
                     }
+                    if (newProblemChild.getName().equals(problemChild.getName())) { //if we still have the same node, reset it's problem value to break out of a cycle
+                        problems = new int[states.size()];
+                        break;
+                    }
                 }
-                current = newProblemChild;
-                if (problemChild.getName().equals(newProblemChild.getName())) {hasBeen++;}
-                else {hasBeen = 0;}
-                if (hasBeen > colors.size()) {break;}
+                current = newProblemChild; //adjust from the new most problematic state
+                if (isComplete()) { //break condition
+                    complete = true;
+                    for (State s: states){
+                        System.out.println(s.getName() + " " + temp[index.get(s)].getName());
+                    }
+                    break;
+                }
+                if (localSteps > 1000000) { //if the steps exceed 1 mil we are probably stuck at a minima, need to reset
+                    for (State s: states){temp[index.get(s)] = colors.get(r.nextInt(colors.size()));}
+                    localSteps = 0;
+                }
             }
             if ((System.currentTimeMillis() > maxTime)) { //timeout after 1 min
                 System.out.println("Failed. Search time exceeded one minute.");
                 break;
-            }
-            if (isComplete()) { //break condition
-                complete = true;
-                for (State s: states){
-                    System.out.println(s.getName() + " " + temp[index.get(s)].getName());
-                }
             }
         }
         System.out.println("Number of steps: " + steps);
