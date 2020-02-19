@@ -186,9 +186,9 @@ public class Country {
         }
 
         steps++; //increment steps
-
+        long startTime = System.currentTimeMillis();
+        long maxTime = 60 * 1000 + startTime;
         while (!complete) { //run loop until all states are valid (see helper method)
-
             for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
                 //generate random starting place
                 int start = r.nextInt(states.size());
@@ -208,7 +208,11 @@ public class Country {
                     }
                 }
             }
-            if (isComplete()){complete = true;}
+            if ((System.currentTimeMillis() > maxTime)) {
+                System.out.println("Timed out.");
+                break;
+            }
+            if (isComplete()) {complete = true;}
         }
 
         //print final values
@@ -217,7 +221,6 @@ public class Country {
         }
         System.out.println("Number of steps: " + steps);
     }
-
 
     class StateComparator implements Comparator<State>{
         public int compare(State s1, State s2) {

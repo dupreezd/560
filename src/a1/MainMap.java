@@ -52,11 +52,8 @@ public class MainMap {
         in.close();
         //endregion
 
-        //TEST
-        //country.localSearch();
-
-        //BE SURE TO UNCOMMENT THIS
-        //country.backtrackingSearch(); //full backtracking search
+        country.backtrackingSearch();
+        country.localSearch();
 
         //region *TESTING*
 //        for (State state: country.getStates()){
