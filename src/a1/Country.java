@@ -33,7 +33,6 @@ public class Country {
             index.put(states.get(i), i);
         }
     }
-
     public void setBorders() { //constructs the adjacency matrix "borders"
         buildIndex();
         borders = new boolean[states.size()][states.size()];
@@ -54,35 +53,6 @@ public class Country {
         for (int i = 0; i < states.size(); i++) {
             domain.add(new HashSet<Color>(tempSet)); //just adding a set of all the colors for each state
         }
-    }
-
-    public boolean isValid(State s, Color c) { //check whether or not a state can be colored
-        nodesSearched++;
-        for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
-            if (borders[index.get(s)][i] && c.equals(tempColors[i])) { return false; } //it's a neighbor and it's the same color, it's a no
-        }
-        return true;
-    }
-
-    //same as isValid method but uses temp[] for local search!
-    public boolean isValidLS(State s, Color c) { //check whether or not a state can be colored
-
-        for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
-            if (borders[index.get(s)][i] && c.equals(temp[i])) { return false; } //it's a neighbor and it's the same color, it's a no
-        }
-        return true;
-    }
-
-    public boolean paint(State state) { //recursive function that tests colors and updates tempColors to something valid, or return false
-        for (Color color: colors) {
-            if (isValid(state, color)) { //if it's valid to paint it the current color...
-                tempColors[index.get(state)] = color; //paint it this color
-                if (index.get(state)+1 == states.size()) { return true; }  //if we're at the end, then we're done
-                if (paint(states.get(index.get(state)+1))) { return true; } //otherwise, keep going
-                tempColors[index.get(state)] = null; //if the above recursive run didn't work, we have to reset and try another color
-            }
-        }
-        return false; //if it never returns true, then there's no solution
     }
 
     public boolean arcIsValid(State s, Color c, List<Set<Color>> tempDomain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
@@ -121,7 +91,6 @@ public class Country {
         }
         return true;
     }
-
     public boolean arcPaint(List<Set<Color>> domain, PriorityQueue<State> pq) {
         State state = pq.poll();
         nodesSearched++;
@@ -153,15 +122,9 @@ public class Country {
         }
         return false;
     }
-
     public void backtrackingSearch() { //runs the paint function, actually changes the state's colors, and prints the output as requested
         setBorders();
         System.out.println("\nBacktracking search result: ");
-//        if (paint(states.get(0))) {
-//            for (State s : states) {
-//                s.setColor(tempColors[index.get(s)]);
-//                System.out.println(s.getName() + " " + s.getColor());
-//            }
         if (arcPaint(domain, pq)) {
             for (int i = 0; i < domain.size(); i++) {
                 for (Color color: domain.get(i)) {
@@ -175,6 +138,13 @@ public class Country {
         System.out.println("Nodes searched: " + nodesSearched);
     }
 
+    public boolean isValidLS(State s, Color c) { //check whether or not a state can be colored
+
+        for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
+            if (borders[index.get(s)][i] && c.equals(temp[i])) { return false; } //it's a neighbor and it's the same color, it's a no
+        }
+        return true;
+    }
     public int checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
         int con = 0;
 
@@ -190,7 +160,6 @@ public class Country {
         }
         return con;
     }
-
     public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
         for (State s: states){
 
@@ -206,16 +175,14 @@ public class Country {
         return true;
     }
 
-
     public void localSearch(){
         setBorders();
         boolean complete = false;
         Random r = new Random(); //will use for random assignment
         System.out.println("\nLocal Search Result: ");
 
-        //start by assigning random colors
         for (State s: states){
-            temp[index.get(s)] = colors.get(r.nextInt(colors.size()));
+            temp[index.get(s)] = colors.get(0);
         }
 
         steps++; //increment steps
@@ -223,7 +190,6 @@ public class Country {
         while (!complete) { //run loop until all states are valid (see helper method)
 
             for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
-
                 //generate random starting place
                 int start = r.nextInt(states.size());
 
@@ -240,13 +206,9 @@ public class Country {
                             curConstraints = next; //new lowest number to beat
                         }
                     }
+                }
             }
-
-            }
-
-            if (isComplete()){
-                complete = true;
-            }
+            if (isComplete()){complete = true;}
         }
 
         //print final values
@@ -255,6 +217,7 @@ public class Country {
         }
         System.out.println("Number of steps: " + steps);
     }
+
 
     class StateComparator implements Comparator<State>{
         public int compare(State s1, State s2) {

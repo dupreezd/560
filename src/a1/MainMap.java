@@ -53,7 +53,7 @@ public class MainMap {
         //endregion
 
         //TEST
-        country.localSearch();
+        //country.localSearch();
 
         //BE SURE TO UNCOMMENT THIS
         //country.backtrackingSearch(); //full backtracking search
