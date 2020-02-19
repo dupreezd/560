@@ -2,14 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="baeda8e7-2074-40e4-ac9e-01ffa90fee94" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Country$StateComparator.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Country$StateComparator.class" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/out/production/a1/a1/Country.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/Country.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" beforeDir="false" afterPath="$PROJECT_DIR$/out/production/a1/a1/MainMap.class" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/a1/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/a1/Country.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/Country.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/a1/MainMap.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/a1/MainMap.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,7 +13,7 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="CoverageViewManager">
-    <option name="myElementSize" value="84" />
+    <option name="myElementSize" value="83" />
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -56,30 +52,30 @@
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="318" y="85" key="#Project_Structure/0.23.1440.813@0.23.1440.813" timestamp="1582125729349" />
-    <state x="182" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582126905787">
+    <state x="182" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1582128269013">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state x="182" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.813@0.23.1440.813" timestamp="1582126905787" />
+    <state x="182" y="81" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.23.1440.813@0.23.1440.813" timestamp="1582128269013" />
     <state x="561" y="315" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog" timestamp="1582077849302">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
     <state x="561" y="315" key="#com.intellij.ide.util.projectWizard.JdkChooserPanel.MyDialog/0.23.1440.813@0.23.1440.813" timestamp="1582077849302" />
-    <state width="1354" height="239" key="GridCell.Tab.0.bottom" timestamp="1582127712448">
+    <state width="1354" height="175" key="GridCell.Tab.0.bottom" timestamp="1582136203001">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1354" height="239" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1582127712448" />
-    <state width="1354" height="239" key="GridCell.Tab.0.center" timestamp="1582127712448">
+    <state width="1354" height="175" key="GridCell.Tab.0.bottom/0.23.1440.813@0.23.1440.813" timestamp="1582136203001" />
+    <state width="1354" height="175" key="GridCell.Tab.0.center" timestamp="1582136202999">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1354" height="239" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1582127712448" />
-    <state width="1354" height="239" key="GridCell.Tab.0.left" timestamp="1582127712447">
+    <state width="1354" height="175" key="GridCell.Tab.0.center/0.23.1440.813@0.23.1440.813" timestamp="1582136202999" />
+    <state width="1354" height="175" key="GridCell.Tab.0.left" timestamp="1582136202998">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1354" height="239" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1582127712447" />
-    <state width="1354" height="239" key="GridCell.Tab.0.right" timestamp="1582127712448">
+    <state width="1354" height="175" key="GridCell.Tab.0.left/0.23.1440.813@0.23.1440.813" timestamp="1582136202998" />
+    <state width="1354" height="175" key="GridCell.Tab.0.right" timestamp="1582136203000">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
-    <state width="1354" height="239" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1582127712448" />
+    <state width="1354" height="175" key="GridCell.Tab.0.right/0.23.1440.813@0.23.1440.813" timestamp="1582136203000" />
     <state width="1354" height="268" key="GridCell.Tab.1.bottom" timestamp="1582125743646">
       <screen x="0" y="23" width="1440" height="813" />
     </state>
@@ -98,7 +94,7 @@
     <state width="1354" height="268" key="GridCell.Tab.1.right/0.23.1440.813@0.23.1440.813" timestamp="1582125743645" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/a1$MainMap.ic" NAME="MainMap Coverage Results" MODIFIED="1582127712428" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+    <SUITE FILE_PATH="coverage/a1$MainMap.ic" NAME="MainMap Coverage Results" MODIFIED="1582136202973" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
       <FILTER>a1.*</FILTER>
     </SUITE>
   </component>

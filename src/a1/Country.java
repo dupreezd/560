@@ -13,8 +13,10 @@ public class Country {
 
     private boolean[][] borders; //adjacency matrix tracking which nodes border one another
     private Color[] temp; //temporary color array for local search
+    private int[] problems;
     private int nodesSearched; //counter used to report # of steps in the backtracking output
     private int steps; //counter to report # of steps in local search
+    private int con = 0;
 
     private List<Set<Color>> domain; //set of possible domains for backtracking (arc consistency)
     private PriorityQueue<State> pq; //priority queue to sort by most constraining variable
@@ -44,6 +46,7 @@ public class Country {
             pq.add(state);
         }
         temp = new Color[states.size()]; //initialize the temp color array for local search
+        problems = new int[states.size()]; //initialize constraint count array for local search
         domain = new ArrayList<>(states.size()); //initialize domains
         Set<Color> tempSet = new HashSet<>(new ArrayList<Color>(colors)); //make a set of all the colors
         for (int i = 0; i < states.size(); i++) {
@@ -117,25 +120,37 @@ public class Country {
         System.out.println("Nodes searched: " + nodesSearched);
     }
 
-    public int checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
-        int con = 0;
+    public State checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
+        con = 0;
+        int mostProblems = 0;
+        State problemChild = name;
 
         for (State s: name.getFwdNeighbors()) {
-            if (checking == temp[index.get(s)]){ //if state being checked is same color as neighbor, increment counter
+            if (checking.equals(temp[index.get(s)])){ //if state being checked is same color as neighbor, increment counter
                 con++;
+                if (++problems[index.get(s)] > mostProblems) {
+                    mostProblems = problems[index.get(s)];
+                    problemChild = s;
+                }
             }
         }
         for (State s: name.getBwdNeighbors()) {
-            if (checking == temp[index.get(s)]){
+            if (checking.equals(temp[index.get(s)])){
                 con++;
+                if (++problems[index.get(s)] > mostProblems) {
+                    mostProblems = problems[index.get(s)];
+                    problemChild = s;
+                }
             }
         }
-        return con;
+        //return con;
+        return problemChild;
     }
     public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
         for (State s: states){
-            if (checkConstraints(s, temp[index.get(s)]) == 0){continue;}
-            return index.get(s) + 1 == states.size(); //true only if we have reached the end of the list
+            checkConstraints(s, temp[index.get(s)]);
+            if (con > 0) {return false;}
+            //return index.get(s) + 1 == states.size(); //true only if we have reached the end of the list
         }
         return true;
     }
@@ -146,29 +161,38 @@ public class Country {
         Random r = new Random(); //will use for random assignment
         System.out.println("\nLocal Search Result: ");
         for (State s: states){temp[index.get(s)] = colors.get(0);}
-        steps++;
 
         long startTime = System.currentTimeMillis(); //setting up timeout condition
         long maxTime = 60 * 1000 + startTime;
         while (!complete) { //run loop until all states are valid (see helper method)
-            for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
+            int start = r.nextInt(states.size());
+            State current = states.get(start);
+            int hasBeen = 0;
+            for (int i = 0; i < states.size()*states.size(); i++) { //10 random starting places before checking the whole list again
                 //generate random starting place
-                int start = r.nextInt(states.size());
+                steps++;
 
                 //check conflicts for existing color, and next color. keep color with lowest constraints
-                State current = states.get(start);
-                int curConstraints = checkConstraints(current, temp[index.get(current)]); //current number of constraints on that state
+                //int curConstraints = checkConstraints(current, temp[index.get(current)]); //current number of constraints on that state
+                State problemChild = checkConstraints(current, temp[index.get(current)]);
+                State newProblemChild = problemChild;
+                int curConstraints = con;
 
-                if (curConstraints != 0){ //don't enter this loop if 0 conflicts
+                if (curConstraints > 0){ //don't enter this loop if 0 conflicts
                     for (Color c : colors) { //if there are less constraints with a different color, sets that color in temp
-                        int next = checkConstraints(current, c);
+                        //int next = checkConstraints(current, c);
+                        newProblemChild = checkConstraints(problemChild, c);
+                        int next = con;
                         if (next < curConstraints) {
-                            temp[start] = c;
-                            steps++; //increment counter
+                            temp[index.get(problemChild)] = c;
                             curConstraints = next; //new lowest number to beat
                         }
                     }
                 }
+                current = newProblemChild;
+                if (problemChild.getName().equals(newProblemChild.getName())) {hasBeen++;}
+                else {hasBeen = 0;}
+                if (hasBeen > colors.size()) {break;}
             }
             if ((System.currentTimeMillis() > maxTime)) { //timeout after 1 min
                 System.out.println("Failed. Search time exceeded one minute.");
