@@ -6,38 +6,36 @@ import java.util.List;
 
 public class Country {
 
-    protected List<Color> colors = new ArrayList<>(); //color index
-    private List<State> states = new ArrayList<>(); //state index
+    protected List<Color> colors = new ArrayList<>();
+    private List<State> states = new ArrayList<>();
     private Map<String, State> hashed_states = new HashMap<>(); //using a map here to simplify the process of recording neighboring states, since states are read in as strings multiple times, don't want to traverse array to match string to state every time
     private Map<State, Integer> index = new HashMap<>(); //map to find the index of a state in the array, for efficiency
 
     private boolean[][] borders; //adjacency matrix tracking which nodes border one another
-    private Color[] tempColors; //parallel array to states list, used to assign colors temporarily while backtracking
-    private Color[] temp; //same temporary color array for local search
+    private Color[] temp; //temporary color array for local search
     private int nodesSearched; //counter used to report # of steps in the backtracking output
     private int steps; //counter to report # of steps in local search
 
-    private List<Set<Color>> domain;
-    private PriorityQueue<State> pq;
+    private List<Set<Color>> domain; //set of possible domains for backtracking (arc consistency)
+    private PriorityQueue<State> pq; //priority queue to sort by most constraining variable
 
     public Country() {} //default constructor
 
     public void addColor(Color c) {colors.add(c);}
     public void addState(State s) {states.add(s);}
     public Map<String, State> getHashMap() {return hashed_states;}
-    public List<Color> getColors() {return colors;}
     public List<State> getStates() {return states;}
 
-    public void buildIndex() { //just a helper function to make the index map
+    public void buildIndex() { //a helper function to make the index map
         for (int i = 0; i < states.size(); i++) {
             index.put(states.get(i), i);
         }
     }
-    public void setBorders() { //constructs the adjacency matrix "borders"
+    public void setBorders() { //constructs the adjacency matrix "borders" for local search and the initial pq + set of domains for backtracking
         buildIndex();
-        borders = new boolean[states.size()][states.size()];
-        pq = new PriorityQueue<>(states.size(), new StateComparator());
-        for (State state: states) {
+        borders = new boolean[states.size()][states.size()]; //adjacency matrix
+        pq = new PriorityQueue<>(states.size(), new StateComparator()); //priority queue with most constraining states on top
+        for (State state: states) { //filling the matrix and pq
             borders[index.get(state)][index.get(state)] = true;
             for (State neighbor: state.getFwdNeighbors()) {
                 borders[index.get(state)][index.get(neighbor)] = true;
@@ -45,75 +43,58 @@ public class Country {
             }
             pq.add(state);
         }
-        tempColors = new Color[states.size()];
-        temp = new Color[states.size()];
-
-        domain = new ArrayList<>(states.size());
-        Set<Color> tempSet = new HashSet<>(new ArrayList<Color>(colors));
+        temp = new Color[states.size()]; //initialize the temp color array for local search
+        domain = new ArrayList<>(states.size()); //initialize domains
+        Set<Color> tempSet = new HashSet<>(new ArrayList<Color>(colors)); //make a set of all the colors
         for (int i = 0; i < states.size(); i++) {
-            domain.add(new HashSet<Color>(tempSet)); //just adding a set of all the colors for each state
+            domain.add(new HashSet<Color>(tempSet)); //adding a copy of the set of all the colors for each state
         }
     }
 
-    public boolean arcIsValid(State s, Color c, List<Set<Color>> tempDomain, PriorityQueue<State> tempPq) { //returns empty list if failed, returns new domain if valid
+    public boolean arcIsValid(State s, Color c, List<Set<Color>> tempDomain, PriorityQueue<State> tempPq) { //true if arc consistency holds
 
         tempDomain.get(s.getPosition()).clear();
-        tempDomain.get(s.getPosition()).add(c);
+        tempDomain.get(s.getPosition()).add(c); //set the color for current state
 
-        List<State> checkerQ = new ArrayList<>();
+        List<State> checkerQ = new ArrayList<>(); //queue used to check & recheck arc consistency each time domains are altered
         checkerQ.add(s);
         checkerQ.addAll(s.getFwdNeighbors());
 
         while (checkerQ.size() > 0) {
             Set<Color> tempSet = tempDomain.get(checkerQ.get(0).getPosition());
-
-            if (tempSet.size() == 0) {
-                return false;
-            }
-
-            if (tempSet.size() == 1) {
+            if (tempSet.size() == 0) {return false;} //when any domain is empty, we need to backtrack
+            if (tempSet.size() == 1) { //when a domain has only one color, we can check that it's neighbors don't have that colors in their domain
                 Color c2 = a1.State.blank;
-                for (Color color: tempSet) {c2 = color;}
-
-                for(State neighbor: checkerQ.get(0).getFwdNeighbors()) {
-                    if(tempDomain.get(neighbor.getPosition()).remove(c2)) {
-                        checkerQ.addAll(neighbor.getFwdNeighbors());
-                    }
-                    if (tempDomain.get(neighbor.getPosition()).size() == 0) {
-                        return false;
-                    }
+                for (Color color: tempSet) {c2 = color;} //easiest way to get the 1 color out of the set, lol
+                for(State neighbor: checkerQ.get(0).getFwdNeighbors()) { //check the fwd arc and update neighbor's domains
+                    if(tempDomain.get(neighbor.getPosition()).remove(c2)) {checkerQ.addAll(neighbor.getFwdNeighbors());} //if domain was altered, neighbors need to be re-checked
+                    if (tempDomain.get(neighbor.getPosition()).size() == 0) {return false;} //if domain becomes empty, it's a fail
                 }
-
-                tempPq.remove(checkerQ.get(0));
+                tempPq.remove(checkerQ.get(0)); //we don't need to check this state later in this branch because it's domain is already fixed
             }
-
-            checkerQ.remove(0);
+            checkerQ.remove(0); //dequeue
         }
-        return true;
+        return true; //if no arc consistency fails happened, the color assignment is valid
     }
-    public boolean arcPaint(List<Set<Color>> domain, PriorityQueue<State> pq) {
+    public boolean arcPaint(List<Set<Color>> domain, PriorityQueue<State> pq) { //main backtracking function, recursive
         State state = pq.poll();
         nodesSearched++;
+        for(Color color: domain.get(state.getPosition())) { //for color in this state's domain
 
-        for(Color color: domain.get(state.getPosition())) {
-
-            List<Set<Color>> tempDomain = new ArrayList<Set<Color>>(domain);
-            for (int i = 0; i < tempDomain.size(); i++) {
+            List<Set<Color>> tempDomain = new ArrayList<Set<Color>>(domain); //shallow copy domain
+            for (int i = 0; i < tempDomain.size(); i++) { //turn domain into a one-level-deep copy
                 tempDomain.add(i, new HashSet<Color>(tempDomain.get(i)));
                 tempDomain.remove(i+1);
             }
-
-            PriorityQueue<State> tempPq = new PriorityQueue<>(pq);
+            PriorityQueue<State> tempPq = new PriorityQueue<>(pq); //copy the pq
 
             if (arcIsValid(state, color, tempDomain, tempPq)) {
-
-                if (tempPq.isEmpty()) {
+                if (tempPq.isEmpty()) { //when we find a complete solution we update the main domain
                     this.pq = tempPq;
                     this.domain = tempDomain;
                     return true;
                 }
-
-                if (arcPaint(tempDomain, tempPq)) {
+                if (arcPaint(tempDomain, tempPq)) { //if the recursive call works, we give take it's temp domain and pq
                     pq = tempPq;
                     domain = tempDomain;
                     return true;
@@ -122,7 +103,7 @@ public class Country {
         }
         return false;
     }
-    public void backtrackingSearch() { //runs the paint function, actually changes the state's colors, and prints the output as requested
+    public void backtrackingSearch() { //runs the arcPaint function, actually changes the state's colors, and prints the output as requested
         setBorders();
         System.out.println("\nBacktracking search result: ");
         if (arcPaint(domain, pq)) {
@@ -132,19 +113,10 @@ public class Country {
                     System.out.println(states.get(i).getName() + " " + color.getName());
                 }
             }
-        } else {
-            System.out.println("No solution");
-        }
+        } else {System.out.println("No solution");}
         System.out.println("Nodes searched: " + nodesSearched);
     }
 
-    public boolean isValidLS(State s, Color c) { //check whether or not a state can be colored
-
-        for (int i = 0; i < states.size(); i++) { //compare current state to all the other ones
-            if (borders[index.get(s)][i] && c.equals(temp[i])) { return false; } //it's a neighbor and it's the same color, it's a no
-        }
-        return true;
-    }
     public int checkConstraints(State name, Color checking){ //objective function that counts number of conflicts with neighboring states
         int con = 0;
 
@@ -162,16 +134,9 @@ public class Country {
     }
     public boolean isComplete(){ //checks if every state is valid to see if we have solved the problem
         for (State s: states){
-
-            if (checkConstraints(s, temp[index.get(s)]) == 0){
-                continue;
-            } if (index.get(s) + 1 == states.size()){
-                return true; //true only if we have reached the end of the list
-            } else {
-                return false;
-            }
+            if (checkConstraints(s, temp[index.get(s)]) == 0){continue;}
+            return index.get(s) + 1 == states.size(); //true only if we have reached the end of the list
         }
-
         return true;
     }
 
@@ -180,13 +145,10 @@ public class Country {
         boolean complete = false;
         Random r = new Random(); //will use for random assignment
         System.out.println("\nLocal Search Result: ");
+        for (State s: states){temp[index.get(s)] = colors.get(0);}
+        steps++;
 
-        for (State s: states){
-            temp[index.get(s)] = colors.get(0);
-        }
-
-        steps++; //increment steps
-        long startTime = System.currentTimeMillis();
+        long startTime = System.currentTimeMillis(); //setting up timeout condition
         long maxTime = 60 * 1000 + startTime;
         while (!complete) { //run loop until all states are valid (see helper method)
             for (int i = 0; i < 10; i++) { //10 random starting places before checking the whole list again
@@ -208,21 +170,21 @@ public class Country {
                     }
                 }
             }
-            if ((System.currentTimeMillis() > maxTime)) {
-                System.out.println("Timed out. Search failed:");
+            if ((System.currentTimeMillis() > maxTime)) { //timeout after 1 min
+                System.out.println("Failed. Search time exceeded one minute.");
                 break;
             }
-            if (isComplete()) {complete = true;}
-        }
-
-        //print final values
-        for (State s: states){
-            System.out.println(s.getName() + " " + temp[index.get(s)].getName());
+            if (isComplete()) { //break condition
+                complete = true;
+                for (State s: states){
+                    System.out.println(s.getName() + " " + temp[index.get(s)].getName());
+                }
+            }
         }
         System.out.println("Number of steps: " + steps);
     }
 
-    class StateComparator implements Comparator<State>{
+    class StateComparator implements Comparator<State>{ //indicates which state is most constraining
         public int compare(State s1, State s2) {
             if (s1.getFwdNeighbors().size() < s2.getFwdNeighbors().size()) {return 1;}
             else if (s1.getFwdNeighbors().size() > s2.getFwdNeighbors().size()) {return -1;}

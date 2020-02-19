@@ -2,10 +2,6 @@ package a1;
 
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 public class MainMap {
 
@@ -23,6 +19,7 @@ public class MainMap {
         one string representing state per line
         newline
         two strings representing neighboring states per line
+        newline?
          */
 
         while (!in.ready()) {} //stalls until an input it available
@@ -54,15 +51,6 @@ public class MainMap {
 
         country.backtrackingSearch();
         country.localSearch();
-
-        //region *TESTING*
-//        for (State state: country.getStates()){
-//            System.out.println(state.getName());
-//            for (State neighbor: state.getNeighbors()) {
-//                System.out.println("  " + neighbor.getName());
-//            }
-//        }
-        //endregion
 
     }
 
