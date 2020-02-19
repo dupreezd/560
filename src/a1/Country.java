@@ -209,7 +209,7 @@ public class Country {
                 }
             }
             if ((System.currentTimeMillis() > maxTime)) {
-                System.out.println("Timed out.");
+                System.out.println("Timed out. Search failed:");
                 break;
             }
             if (isComplete()) {complete = true;}
